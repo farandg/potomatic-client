@@ -1,0 +1,3 @@
+install nginx
+https://www.nginx.com/blog/setting-up-nginx/
+
