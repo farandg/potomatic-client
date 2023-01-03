@@ -6,11 +6,11 @@
 
 PROMETHEUS_VERSION=2.22.0
 PROMETHEUS_ARCH=linux-armv7
-POTOMATIC_IP=$(hostname -i | awk )
+POTOMATIC_IP=$(hostname -i)
 
 echo "Welcome to the Prometheus installation subroutine \nProviding your Potomatic with full observability."
 # Downloading and installing Prometheus and dependencies
-wget -P / https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz
+wget --directory-prefix=/ https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz
 tar xfz /prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz
 mv /prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH} /prometheus
 rm /prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz
@@ -19,6 +19,8 @@ echo "Setting up the Prometheus service"
 cp ../files/prometheus.service /etc/systemd/system/prometheus.service
 systemctl enable prometheus
 systemctl start prometheus
+
+
 
 
 
