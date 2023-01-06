@@ -8,7 +8,7 @@ PROMETHEUS_VERSION=2.22.0
 PROMETHEUS_ARCH=linux-armv7
 POTOMATIC_IP=$(hostname -i)
 
-echo "Welcome to the Prometheus installation subroutine \nProviding your Potomatic with full observability."
+echo "Welcome to the Prometheus installation subroutine /nProviding your Potomatic with full observability."
 # Downloading and installing Prometheus and dependencies
 wget -q https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz --directory-prefix=/
 tar xfz /prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz
