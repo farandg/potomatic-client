@@ -1,3 +1,7 @@
 install nginx
-https://www.nginx.com/blog/setting-up-nginx/
+  https://www.nginx.com/blog/setting-up-nginx/
+
+find metrics-producing tool
+  https://github.com/OpenObservability/OpenMetrics
+
 
