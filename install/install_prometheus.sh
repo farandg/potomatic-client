@@ -16,7 +16,7 @@ sleep 1
 echo "Providing your Potomatic with full observability."
 echo ""
 sleep 1
-echo "Setting up the firewal" 
+echo "Setting up the firewall" 
 # Open the firewall for Prometheus traffic
 iptables -A INPUT -i wlan0 -p tcp -m tcp --dport $PROMETHEUS_PORT -j ACCEPT
 iptables -A OUTPUT -o wlan0 -p tcp -m tcp -m tcp --sport $PROMETHEUS_PORT -m state --state RELATED,ESTABLISHED -j ACCEPT
