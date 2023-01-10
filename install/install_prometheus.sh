@@ -14,44 +14,54 @@ PROMETHEUS_INSTALL_DIR=/opt
 PROMETHEUS_DIR=$PROMETHEUS_INSTALL_DIR/prometheus
 POTOMATIC_IP=$(hostname -i)
 
+function abort {
+  sudo rm -rf $PROMETHEUS_DIR
+  sudo mv $PROMETHEUS_DIR.old $PROMETHEUS_DIR
+}
+
 echo "Welcome to the Prometheus installation subroutine"
 sleep 1
 echo "Providing your Potomatic with full observability."
 echo ""
 sleep 1
-echo "Setting up the firewall" 
-sleep 1q
-# Open the firewall for Prometheus traffic
-iptables -A INPUT -i wlan0 -p tcp --dport $PROMETHEUS_PORT -j ACCEPT
-iptables -A OUTPUT -o wlan0 -p tcp -m state --state RELATED,ESTABLISHED -sport $PROMETHEUS_PORT -j ACCEPT
-sleep 1
+
+# echo "Setting up the firewall" 
+# sleep 1
+# # Open the firewall for Prometheus traffic
+# sudo iptables -A INPUT -i wlan0 -p tcp --destination $PROMETHEUS_PORT -j ACCEPT
+# sudo iptables -A OUTPUT -o wlan0 -p tcp -m state --state RELATED,ESTABLISHED -source $PROMETHEUS_PORT -j ACCEPT
+# sleep 1
 
 if [ -d "$PROMETHEUS_DIR" ]; then
   # Delete the Prometheus directory and its contents if it exists
-  echo "Deleting existing Prometheus installation"
-  sudo rm -rf $PROMETHEUS_DIR
+  echo "Previous installation detected. Removing..."
+  sudo mv $PROMETHEUS_DIR $PROMETHEUS_DIR.old
 fi
 
-mkdir $PROMETHEUS_DIR || { echo "Error creating directory $PROMETHEUS_DIR" >&2; exit 1; }
+sudo mkdir -p $PROMETHEUS_DIR || { echo "Error creating directory $PROMETHEUS_DIR. Aborting..." >&2; abort; exit 1; }
 
+echo "Downloading package"
+sleep 1
 if ! command -v wget > /dev/null; then
   # Install wget if it is not present
   echo "[ERROR] wget not found. Installing ..."
   if ! command -v apt-get > /dev/null; then
     echo "[ERROR] apt-get is not installed. Please install apt-get and try again." >&2
+    abort
     exit 1
   fi
   sudo apt-get update -y
   sudo apt-get install -y wget
 fi
 
-wget -q https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz --directory-prefix=$PROMETHEUS_INSTALL_DIR && echo "Package downloaded"
+sudo wget -q https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz --directory-prefix=$PROMETHEUS_INSTALL_DIR && echo "Package downloaded"
 
 if ! command -v tar > /dev/null; then
   # Install wget if it is not present
   echo "[ERROR] tar not found. Installing ..."
   if ! command -v apt-get > /dev/null; then
     echo "[ERROR]  apt-get is not installed. Please install apt-get and try again." >&2
+    abort
     exit 1
   fi
   sudo apt-get update -y
@@ -79,7 +89,8 @@ if ! command -v openssl > /dev/null; then
   # Install openssl if it is not present
   echo "[ERROR] openssl not found. Installing..."
   if ! command -v apt-get > /dev/null; then
-    echo "[ERROR]  apt-get is not installed. Please install apt-get and try again." >&2
+    echo "[ERROR] apt-get is not installed. Please install apt-get and try again." >&2
+    abort
     exit 1
   fi
   sudo apt-get update -y
@@ -92,14 +103,18 @@ if [ $? -ne 0 ]; then
     echo "[ERROR] generating SSL certificate."
     sleep 1
     echo " Please check and try again, or re-run this script"
+    abort
     exit 1
 fi
 
+echo "Starting Prometheus..."
+sleep 1
 ./prometheus --config.file=$PROMETHEUS_DIR/prometheus.yml &
 
 if [ $? -ne 0 ]; then
     echo "[ERROR] starting Prometheus."
     echo " Please check and try again, or re-run this script"
+    abort
     exit 1
 fi
 
