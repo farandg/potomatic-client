@@ -23,7 +23,6 @@ def index():
 
 @app.route("/<deviceName>/<action>")
 def action(deviceName, action):
-    deviceName.action()
     if action == "on":
         deviceName.on()
     if action == "off":
