@@ -11,25 +11,28 @@ dht       = Adafruit_DHT.DHT11
 
 @app.route('/')
 def index():
-  ( _humidity, _celsius ) = Adafruit_DHT.read_retry( dht, dht_pin )
-  templateData = {
-    'title' : 'POTOSWAY',
-    'page_title' : 'Welcome to Potosway',
-    'subtitle' : 'Smarter planting',
-    '_humidity' : _humidity,
-    '_celsius' : _celsius
-  }
-  return render_template('potosway.html', **templateData)
+    (_humidity, _celsius) = Adafruit_DHT.read_retry(dht, dht_pin)
+    templateData = {
+      'title': 'POTOSWAY',
+      'page_title': 'Welcome to Potosway',
+      'subtitle': 'Smarter planting',
+      '_humidity': _humidity,
+      '_celsius': _celsius
+    }
+    return render_template('potosway.html', **templateData)
 
-@app.route('/led/on', methods=['POST'])
-def led_on():
-    led.on()
-    return 'LED turned on', 200
-
-@app.route('/led/off', methods=['POST'])
-def led_off():
-    led.off()
-    return 'LED turned off', 200
+@app.route("/<deviceName>/<action>")
+def action(deviceName, action):
+    if deviceName == 'led':
+        actuator = led
+    if action == "on":
+        actuator(on)
+    if action == "off":
+        actuator(off)
+    templateData = {
+        'led' : led,
+    }
+    return render_template('index.html', **templateData)
 
 if __name__ == '__main__':
     app.run(debug=True, port=80, host='0.0.0.0')
