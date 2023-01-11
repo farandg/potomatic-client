@@ -14,9 +14,11 @@ def index():
   ( _humidity, _celsius ) = Adafruit_DHT.read_retry( dht, dht_pin )
   templateData = {
     'title' : 'POTOSWAY webapp',
-    'subtitle' : 'Plant smarter'
+    'subtitle' : 'Smarter planting',
+    '_humidity' : _humidity,
+    '_celsius' : _celsius
   }
-  return render_template('./potosway.html', **templateData)
+  return render_template('potosway.html', **templateData)
 
 @app.route('/led/on', methods=['POST'])
 def led_on():
