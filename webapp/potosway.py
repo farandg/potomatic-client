@@ -26,13 +26,15 @@ def action(deviceName, action):
     if deviceName == 'led':
         actuator = led
     if action == "on":
-        actuator(on)
+        actuator.on()
     if action == "off":
-        actuator(off)
+        actuator.off()
     if action == "blink":
-        actuator(blink)
+        actuator.blink(1, 1)
+    if action == "status":
+        actuator.value()
     templateData = {
-        'led' : led
+        'led_status' : led.value()
     }
     return render_template('index.html', **templateData)
 
