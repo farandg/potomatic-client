@@ -7,6 +7,9 @@ global:
 scrape_configs:
   # Scrape Prometheus itself
   - job_name: 'prometheus'
+    scheme: https
+    tls_config:
+      ca_file: prometheus.crt
     static_configs:
       - targets: ['localhost:9090']
   # Scrape node-exporter

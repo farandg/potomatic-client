@@ -1,0 +1,11 @@
+## /etc/con.d/potomatic: crontab for potomatic
+## These are essentially system checks for now, but will evolve in the future
+
+# Make sure services are started before the day begins
+0 4 * * * root systemctl restart lights.service pump.service images.service
+# Make sure services are revived should they fall
+0 * * * * root ./potomatic/scripts/check_lights.sh
+0 * * * * root ./potomatic/scripts/check_lights.sh
+0 * * * * root ./potomatic/scripts/check_lights.sh
+# On the first day of every month grab all images and make a timelapse
+0 5 1 * * root ./potomatic/scripts/timelapse.sh
