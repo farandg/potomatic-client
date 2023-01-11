@@ -1,0 +1,33 @@
+body {
+    background: blue;
+    color: yellow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  title {
+    font-family: Candal;
+    font-size: 30pt;
+  }
+  
+  h1 {
+    font-family: "Days One";
+    font-size: 20pt;
+  }
+  
+  h2 {
+    font-family: "Days One";
+    font-size: 12pt;
+  }
+  
+  .image-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+  
