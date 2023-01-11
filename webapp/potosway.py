@@ -23,14 +23,16 @@ def index():
 
 @app.route("/<deviceName>/<action>")
 def action(deviceName, action):
+    if deviceName == "led":
+        device == led
     if action == "on":
-        deviceName.on()
+        device.on()
     if action == "off":
-        deviceName.off()
+        device.off()
     if action == "blink":
-        deviceName.blink(.5, .3)
+        device.blink(.5, .3)
     if action == "status":
-        deviceName.value()
+        device.value()
     templateData = {
         'led_status' : led.value()
     }
