@@ -13,7 +13,8 @@ dht       = Adafruit_DHT.DHT11
 def index():
   ( _humidity, _celsius ) = Adafruit_DHT.read_retry( dht, dht_pin )
   templateData = {
-    'title' : 'POTOSWAY webapp',
+    'title' : 'POTOSWAY',
+    'page_title' : 'Welcome to Potosway',
     'subtitle' : 'Smarter planting',
     '_humidity' : _humidity,
     '_celsius' : _celsius
