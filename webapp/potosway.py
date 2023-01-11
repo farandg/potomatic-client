@@ -16,7 +16,7 @@ def index():
     'title' : 'POTOSWAY webapp',
     'subtitle' : 'Plant smarter'
   }
-  return render_template('index.html', **templateData)
+  return render_template('potosway.html', **templateData)
 
 @app.route('/led/on', methods=['POST'])
 def led_on():
