@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import Adafruit_DHT, pendulum
-from flask import Flask, request
+from flask import Flask, render_template
 from gpiozero import LED
 
 app       = Flask(__name__)
