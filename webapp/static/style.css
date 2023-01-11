@@ -1,6 +1,6 @@
 body {
-    background: blue;
-    color: yellow;
+    background: rgb(15, 15, 117);
+    color: rgb(247, 247, 211);
     display: flex;
     flex-direction: column;
     align-items: center;
