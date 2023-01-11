@@ -7,5 +7,16 @@
     <body>
         <h2>Current temperature: {{ _celsius }}°C</h2>
         <h2>Current humidity: {{ _humidity }}%</h2>
-    </body>
+        <h1>Devices</h1>
+        <h2> Status </h2>
+        <h3> RED LED ==>  {{ ledRed  }}</h3>
+        <h3> YLW LED ==>  {{ ledYlw  }}</h3>
+        <h3> GRN LED ==>  {{ ledGrn  }}</h3>
+        <br>
+        <h2> Commands </h2>
+        <h3> 
+            LED Ctrl ==> 
+            <a href="/ledRed/on" class="button">TURN ON</a>  
+            <a href="/ledRed/off"class="button">TURN OFF</a>
+        </body>
 </html>

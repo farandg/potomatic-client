@@ -30,4 +30,14 @@ body {
     display: block;
     margin: 0 auto;
   }
-  
+  .button {
+    font: bold 15px Candal;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #228305;
+    border-right: 1px solid #228305;
+    border-bottom: 1px solid #228305;
+    border-left: 1px solid #CCCCCC;
+  }  
