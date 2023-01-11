@@ -32,9 +32,13 @@ def action(deviceName, action):
     if action == "blink":
         device.blink(.5, .3)
     if action == "status":
-        device.value()
+        device.is_lit()
+        if device.is_lit() == true:
+            status = ON
+        else: 
+            status = OFF
     templateData = {
-        'led_status' : led.value()
+        'led_status' : status
     }
     return render_template('potosway.html', **templateData)
 
