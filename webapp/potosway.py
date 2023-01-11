@@ -24,7 +24,7 @@ def index():
 @app.route("/<deviceName>/<action>")
 def action(deviceName, action):
     if deviceName == "led":
-        device == led
+        device = led
     if action == "on":
         device.on()
     if action == "off":
