@@ -24,7 +24,7 @@ function abort {
 }
 
 function cleanup {
-  sudo rm -rf $PROMETHEUS_INSTALL_DIR.old
+  sudo rm -rf $PROMETHEUS_DIR.old
   sudo rm -rf $PROMETHEUS_DIR/prometheus-${PROMETHEUS_VERSION}*
 }
 

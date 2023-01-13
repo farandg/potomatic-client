@@ -12,7 +12,9 @@ NODE_EXPORTER_DIR=$NODE_EXPORTER_INSTALL_DIR/node_exporter
 POTOMATIC_HOSTNAME=$(hostname -s)
 
 function abort {
-  sudo rm -rf $NODE_EXPORTER_DIR
+  if [ -d $NODE_EXPORTER_DIR ]; then
+    sudo rm -rf $NODE_EXPORTER_DIR  
+  fi
   if [ -d $NODE_EXPORTER_DIR.old ]; then
     sudo mv $NODE_EXPORTER_DIR.old $NODE_EXPORTER_DIR
   fi
@@ -54,10 +56,11 @@ done
 if [ -d "$NODE_EXPORTER_DIR" ]; then
   # Delete the node_exporter directory and its contents if it exists
   echo "Previous installation detected. Removing..."
+  echo ""
   sleep 1
   sudo mv $NODE_EXPORTER_DIR $NODE_EXPORTER_DIR.old
-  echo ""
   echo "Removing done."
+  echo ""
   sleep 1
 fi
 
@@ -66,13 +69,17 @@ echo "Downloading install package..."
 sudo mkdir -p $NODE_EXPORTER_DIR || { echo "Error creating directory $NODE_EXPORTER_DIR. Aborting..." >&2; abort; exit 1; }
 wget -q https://github.com/node_exporter/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz --directory-prefix=$NODE_EXPORTER_INSTALL_DIR || { echo "Error while unpacking. Aborting..." >&2; abort; exit 1;}
 echo "Package downloaded"
+echo ""
 sleep 1
 
 echo "Unpacking..."
+echo ""
 sudo tar xfz $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz -C $NODE_EXPORTER_DIR --strip-components=1 || {echo "[ERROR] unpacking. Aborting..." >&2; echo "Please try again manually, or re-run this script"; abort; exit 1;}
 sudo rm $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz || {echo "[ERROR] deleting file $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz" >&2; echo "Please try again manually, or re-run this script"; abort; exit 1;}
 
 echo "Setting up and starting node_exporter"
+echo ""
+sleep 1
 sudo cp ../files/system/services/node_exporter.service /etc/systemd/system/
 sudo systemctl daemon-reload && sudo systemctl start node_exporter && sudo systemctl enable node_exporter
 cd $NODE_EXPORTER_DIR
