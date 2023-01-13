@@ -22,7 +22,7 @@ function abort {
 }
 
 function cleanup {
-  sudo rm -rf $NODE_EXPORTER_INSTALL_DIR.old
+  sudo rm -rf $NODE_EXPORTER_INSTALL_DIR.old/
   sudo rm -rf $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}*
 }
 

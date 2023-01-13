@@ -16,15 +16,15 @@ POTOMATIC_HOSTNAME=$(hostname -s)
 
 function abort {
   if [ -d $PROMETHEUS_DIR ]; then
-    sudo rm -rf $PROMETHEUS_DIR  
+    sudo rm -rf $PROMETHEUS_DIR/ 
   fi
   if [ -d $PROMETHEUS_DIR.old ]; then
-    sudo mv $PROMETHEUS_DIR.old $NODE_EXPORTER_DIR
+    sudo mv $PROMETHEUS_DIR.old/ $NODE_EXPORTER_DIR/
   fi
 }
 
 function cleanup {
-  sudo rm -rf $PROMETHEUS_DIR.old
+  sudo rm -rf $PROMETHEUS_DIR.old/
   sudo rm -rf $PROMETHEUS_DIR/prometheus-${PROMETHEUS_VERSION}*
 }
 
