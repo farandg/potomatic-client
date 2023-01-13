@@ -41,12 +41,12 @@ if [ -d "$PROMETHEUS_DIR" ]; then
   echo "Previous installation detected. Removing..."
   sleep 1
   sudo mv $PROMETHEUS_DIR $PROMETHEUS_DIR.old
+  echo ""
+  echo "Removing done."
+  sleep 1
 fi
 
-sudo mkdir -p $PROMETHEUS_DIR || { echo "Error creating directory $PROMETHEUS_DIR. Aborting..." >&2; abort; exit 1; }
-echo ""
-echo "Removing done. Downloading package..."
-sleep 1
+echo "Downloading install package..."
 if ! command -v wget > /dev/null; then
   # Install wget if it is not present
   echo "[ERROR] wget not found. Installing ..."
@@ -58,10 +58,10 @@ if ! command -v wget > /dev/null; then
   sudo apt-get update -y
   sudo apt-get install -y wget
 fi
+sudo mkdir -p $PROMETHEUS_DIR || { echo "Error creating directory $PROMETHEUS_DIR. Aborting..." >&2; abort; exit 1; }
 sudo wget -q https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz --directory-prefix=$PROMETHEUS_INSTALL_DIR
 
 echo ""
-sleep 1
 echo "Package downloaded. Unpacking..."
 if ! command -v tar > /dev/null; then
   # Install wget if it is not present
@@ -82,11 +82,15 @@ echo "Unpacking done."
 sleep 1
 echo ""
 echo "Setting up, securing and starting Prometheus"
+echo ""
 sleep 1
 sudo cp ../files/prometheus/* $PROMETHEUS_DIR
+sudo cp ../files/system/services/prometheus.service /etc/systemd/system/
+sudo systemctl daemon-reload && sudo systemctl start prometheus && sudo systemctl enable prometheus
 cd $PROMETHEUS_DIR
 
 echo "Starting Prometheus..."
+echo ""
 sleep 1
 sudo nohup ./prometheus --config.file=prometheus.yml --web.enable-lifecycle & || {echo "[ERROR] starting Prometheus. Please check and try again, or re-run this script" >&2; abort; exit 1;}
 
