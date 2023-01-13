@@ -36,7 +36,7 @@ echo "# Welcome to the node_exporter installation subroutine #"
 echo "# Providing your Potomatic with full observability     #"
 echo "########################################################"
 echo ""
-sleep 2
+sleep 1
 
 # Check all necessary components are present
 BINARIES=( wget tar )
