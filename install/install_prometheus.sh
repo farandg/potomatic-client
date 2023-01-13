@@ -38,7 +38,23 @@ echo "# Welcome to the Prometheus installation subroutine #"
 echo "# Providing your Potomatic with full observability  #"
 echo "#####################################################"
 echo ""
-sleep 2
+sleep 1
+
+# Check all necessary components are present
+BINARIES=( wget tar )
+
+if ! command -v apt-get > /dev/null; then
+  echo "[ERROR] apt-get is not installed. Please install apt-get and try again." >&2
+  sleep 1
+  abort
+  exit 1
+fi
+
+for val in $BINARIES; do
+  if ! command -v $val > /dev/null; then
+    apt-get -y $val
+  fi
+done
 
 if [ -d "$PROMETHEUS_DIR" ]; then
   # Delete the Prometheus directory and its contents if it exists
