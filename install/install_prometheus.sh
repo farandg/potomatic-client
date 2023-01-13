@@ -58,9 +58,10 @@ if ! command -v wget > /dev/null; then
   sudo apt-get update -y
   sudo apt-get install -y wget
 fi
-sudo wget -q https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz --directory-prefix=$PROMETHEUS_INSTALL_DIR && echo "Package downloaded"
+sudo wget -q https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz --directory-prefix=$PROMETHEUS_INSTALL_DIR
 
 echo ""
+sleep 1
 echo "Package downloaded. Unpacking..."
 if ! command -v tar > /dev/null; then
   # Install wget if it is not present
@@ -73,14 +74,8 @@ if ! command -v tar > /dev/null; then
   sudo apt-get update -y
   sudo apt-get install -y tar
 fi
-sudo tar xfz $PROMETHEUS_INSTALL_DIR/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz -C $PROMETHEUS_DIR --strip-components=1
-sudo rm $PROMETHEUS_INSTALL_DIR/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz
-
-if [ $? -eq 1 ]; then
-    echo "[ERROR] deleting file $PROMETHEUS_INSTALL_DIR/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz" >&2
-    echo "Please try again manually, or re-run this script"
-    exit 1
-fi
+sudo tar xfz $PROMETHEUS_INSTALL_DIR/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz -C $PROMETHEUS_DIR --strip-components=1 || {echo "[ERROR] unpacking. Aborting..." >&2; echo "Please try again manually, or re-run this script"; abort; exit 1;}
+sudo rm $PROMETHEUS_INSTALL_DIR/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz || {echo "[ERROR] deleting file $PROMETHEUS_INSTALL_DIR/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz" >&2; echo "Please try again manually, or re-run this script"; abort; exit 1;}
 
 echo ""
 echo "Unpacking done."
@@ -91,41 +86,9 @@ sleep 1
 sudo cp ../files/prometheus/* $PROMETHEUS_DIR
 cd $PROMETHEUS_DIR
 
-# echo "Generating SSL certificate"
-# sleep 1
-# if ! command -v openssl > /dev/null; then
-#   # Install openssl if it is not present
-#   echo "[ERROR] openssl not found. Installing..."
-#   if ! command -v apt-get > /dev/null; then
-#     echo "[ERROR] apt-get is not installed. Please install apt-get and try again." >&2
-#     abort
-#     exit 1
-#   fi
-#   sudo apt-get update -y
-#   sudo apt-get install -y openssl
-# fi
-
-# sudo openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -keyout prometheus.key -out prometheus.crt -subj "/C=FR/ST=Nord/L=Lille/O=localhost/CN=localhost.local" -addext "subjectAltName = DNS:localhost"
-
-# if [ $? -ne 0 ]; then
-#     echo "[ERROR] generating SSL certificate."
-#     sleep 1
-#     echo " Please check and try again, or re-run this script"
-#     abort
-#     exit 1
-# fi
-
 echo "Starting Prometheus..."
 sleep 1
-sudo nohup ./prometheus --config.file=prometheus.yml --web.enable-lifecycle &
-# sudo nohup ./prometheus --config.file=prometheus.yml --web.config.file=web.yml --web.enable-lifecycle &
-
-if [ $? -ne 0 ]; then
-    echo "[ERROR] starting Prometheus."
-    echo " Please check and try again, or re-run this script"
-    abort
-    exit 1
-fi
+sudo nohup ./prometheus --config.file=prometheus.yml --web.enable-lifecycle & || {echo "[ERROR] starting Prometheus. Please check and try again, or re-run this script" >&2; abort; exit 1;}
 
 cleanup
 echo "All done !!"
