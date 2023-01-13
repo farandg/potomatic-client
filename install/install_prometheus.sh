@@ -79,6 +79,7 @@ sleep 1
 
 echo "Setting up, securing and starting Prometheus"
 sleep 1
+PATH=/$PROMETHEUS_DIR:$PATH
 sudo cp ../files/prometheus/* $PROMETHEUS_DIR/
 sudo cp ../files/system/services/prometheus.service /etc/systemd/system/
 sudo systemctl daemon-reload

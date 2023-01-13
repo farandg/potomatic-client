@@ -77,6 +77,7 @@ sleep 1
 
 echo "Setting up and starting node_exporter"
 sleep 1
+PATH=/$NODE_EXPORTER_DIR:$PATH
 sudo cp ../files/system/services/node_exporter.service /etc/systemd/system/node_exporter.service
 sudo systemctl daemon-reload
 sleep 1
