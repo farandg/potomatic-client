@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import Adafruit_DHT, pendulum
+import Adafruit_DHT, pendulum, random
 from flask import Flask, render_template
 from gpiozero import LED
 
