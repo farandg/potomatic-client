@@ -16,7 +16,7 @@ function abort {
     sudo rm -rf $NODE_EXPORTER_DIR  
   fi
   if [ -d $NODE_EXPORTER_DIR.old ]; then
-    sudo mv -f $NODE_EXPORTER_DIR.old $NODE_EXPORTER_DIR
+    sudo mv -f $NODE_EXPORTER_DIR.old/ $NODE_EXPORTER_DIR/
   fi
 }
 
@@ -70,7 +70,7 @@ echo "Package downloaded"
 sleep 1
 
 echo "Unpacking..."
-udo tar xfz $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz -C $NODE_EXPORTER_DIR --strip-components=1 || { echo "[ERROR] unpacking. Aborting..." >&2; echo "Please try again manually, or re-run this script"; abort; exit 1; }
+sudo tar xfz $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz -C $NODE_EXPORTER_DIR --strip-components=1 || { echo "[ERROR] unpacking. Aborting..." >&2; echo "Please try again manually, or re-run this script"; abort; exit 1; }
 sudo rm $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz || { echo "[ERROR] deleting file $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz" >&2; echo "Please try again manually, or re-run this script"; abort; exit 1; }
 
 echo "Setting up and starting node_exporter"
