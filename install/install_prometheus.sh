@@ -61,7 +61,6 @@ if [ -d "$PROMETHEUS_DIR" ]; then
   echo "Previous installation detected. Removing..."
   sleep 1
   sudo mv $PROMETHEUS_DIR $PROMETHEUS_DIR.old
-  echo ""
   echo "Removing done."
   sleep 1
 fi
