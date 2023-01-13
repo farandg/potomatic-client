@@ -16,7 +16,7 @@ function abort {
     sudo rm -rf $NODE_EXPORTER_DIR  
   fi
   if [ -d $NODE_EXPORTER_DIR.old ]; then
-    sudo mv $NODE_EXPORTER_DIR.old $NODE_EXPORTER_DIR
+    sudo mv -f $NODE_EXPORTER_DIR.old $NODE_EXPORTER_DIR
   fi
 }
 
@@ -58,7 +58,7 @@ if [ -d "$NODE_EXPORTER_DIR" ]; then
   echo "Previous installation detected. Removing..."
   echo ""
   sleep 1
-  sudo mv $NODE_EXPORTER_DIR $NODE_EXPORTER_DIR.old
+  sudo mv -f $NODE_EXPORTER_DIR $NODE_EXPORTER_DIR.old
   echo "Removing done."
   echo ""
   sleep 1
@@ -80,8 +80,12 @@ sudo rm $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE
 echo "Setting up and starting node_exporter"
 echo ""
 sleep 1
-sudo cp ../files/system/services/node_exporter.service /etc/systemd/system/
-sudo systemctl daemon-reload && sudo systemctl start node_exporter && sudo systemctl enable node_exporter
+sudo cp ../files/system/services/node_exporter.service /etc/systemd/system/node_exporter.service
+sudo systemctl daemon-reload
+sleep 2
+sudo systemctl enable node_exporter
+sleep 2
+sudo systemctl start node_exporter
 # cd $NODE_EXPORTER_DIR
 
 # echo "Starting node_exporter"
