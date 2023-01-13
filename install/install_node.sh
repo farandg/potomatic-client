@@ -67,15 +67,15 @@ fi
 echo "Downloading install package..."
 # Downloading and installing node_exporter and dependencies
 sudo mkdir -p $NODE_EXPORTER_DIR || { echo "Error creating directory $NODE_EXPORTER_DIR. Aborting..." >&2; abort; exit 1; }
-sudo wget -q https://github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz --directory-prefix=$NODE_EXPORTER_INSTALL_DIR || { echo "Error while unpacking. Aborting..." >&2; abort; exit 1;}
+sudo wget -q https://github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz --directory-prefix=$NODE_EXPORTER_INSTALL_DIR || { echo "Error while unpacking. Aborting..." >&2; abort; exit 1; }
 echo "Package downloaded"
 echo ""
 sleep 1
 
 echo "Unpacking..."
 echo ""
-sudo tar xfz $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz -C $NODE_EXPORTER_DIR --strip-components=1 || {echo "[ERROR] unpacking. Aborting..." >&2; echo "Please try again manually, or re-run this script"; abort; exit 1;}
-sudo rm $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz || {echo "[ERROR] deleting file $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz" >&2; echo "Please try again manually, or re-run this script"; abort; exit 1;}
+sudo tar xfz $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz -C $NODE_EXPORTER_DIR --strip-components=1 || { echo "[ERROR] unpacking. Aborting..." >&2; echo "Please try again manually, or re-run this script"; abort; exit 1; }
+sudo rm $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz || { echo "[ERROR] deleting file $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz" >&2; echo "Please try again manually, or re-run this script"; abort; exit 1; }
 
 echo "Setting up and starting node_exporter"
 echo ""
@@ -87,8 +87,8 @@ cd $NODE_EXPORTER_DIR
 echo "Starting node_exporter"
 echo ""
 sleep 1
-sudo nohup ./node_exporter --collector.wifi & || {echo "[ERROR] starting node_exporter. Please check and try again, or re-run this script" >&2; abort; exit 1;}
+sudo nohup ./node_exporter --collector.wifi & || { echo "[ERROR] starting node_exporter. Please check and try again, or re-run this script" >&2; abort; exit 1; }
 
 echo "All done !!"
 cleanup
-echo "http://${POTOMATIC_HOSTNAME}.local:9100/metrics should now be exposing data"
+echo "Node_exporter should now be exposing data at http://${POTOMATIC_HOSTNAME}.local:9100/metrics"
