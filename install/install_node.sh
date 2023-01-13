@@ -82,9 +82,9 @@ echo ""
 sleep 1
 sudo cp ../files/system/services/node_exporter.service /etc/systemd/system/node_exporter.service
 sudo systemctl daemon-reload
-sleep 2
+sleep 1
 sudo systemctl enable node_exporter
-sleep 2
+sleep 1
 sudo systemctl start node_exporter
 # cd $NODE_EXPORTER_DIR
 
