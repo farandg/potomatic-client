@@ -82,12 +82,12 @@ echo ""
 sleep 1
 sudo cp ../files/system/services/node_exporter.service /etc/systemd/system/
 sudo systemctl daemon-reload && sudo systemctl start node_exporter && sudo systemctl enable node_exporter
-cd $NODE_EXPORTER_DIR
+# cd $NODE_EXPORTER_DIR
 
-echo "Starting node_exporter"
-echo ""
-sleep 1
-sudo nohup ./node_exporter --collector.wifi & || { echo "[ERROR] starting node_exporter. Please check and try again, or re-run this script" >&2; abort; exit 1; }
+# echo "Starting node_exporter"
+# echo ""
+# sleep 1
+# sudo nohup ./node_exporter --collector.wifi & || { echo "[ERROR] starting node_exporter. Please check and try again, or re-run this script" >&2; abort; exit 1; }
 
 echo "All done !!"
 cleanup
