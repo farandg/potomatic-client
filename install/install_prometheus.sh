@@ -15,13 +15,17 @@ PROMETHEUS_DIR=$PROMETHEUS_INSTALL_DIR/prometheus
 POTOMATIC_HOSTNAME=$(hostname -s)
 
 function abort {
-  sudo rm -rf $PROMETHEUS_INSTALL_DIR
-  sudo mv $PROMETHEUS_INSTALL_DIR.old $PROMETHEUS_INSTALL_DIR
+  if [ -d $PROMETHEUS_DIR ]; then
+    sudo rm -rf $PROMETHEUS_DIR  
+  fi
+  if [ -d $PROMETHEUS_DIR.old ]; then
+    sudo mv $PROMETHEUS_DIR.old $NODE_EXPORTER_DIR
+  fi
 }
 
 function cleanup {
-  sudo rm -rf $PROMETHEUS_INSTALL_DIR/prometheus.old
-  sudo rm -rf $PROMETHEUS_INSTALL_DIR/prometheus-${PROMETHEUS_VERSION}*
+  sudo rm -rf $PROMETHEUS_INSTALL_DIR.old
+  sudo rm -rf $PROMETHEUS_DIR/prometheus-${PROMETHEUS_VERSION}*
 }
 
 # Cleanup eventual previous failed installs

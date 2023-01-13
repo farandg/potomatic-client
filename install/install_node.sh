@@ -12,13 +12,15 @@ NODE_EXPORTER_DIR=$NODE_EXPORTER_INSTALL_DIR/node_exporter
 POTOMATIC_HOSTNAME=$(hostname -s)
 
 function abort {
-  sudo rm -rf $NODE_EXPORTER_INSTALL_DIR
-  sudo mv $NODE_EXPORTER_INSTALL_DIR.old $NODE_EXPORTER_INSTALL_DIR
+  sudo rm -rf $NODE_EXPORTER_DIR
+  if [ -d $NODE_EXPORTER_DIR.old ]; then
+    sudo mv $NODE_EXPORTER_DIR.old $NODE_EXPORTER_DIR
+  fi
 }
 
 function cleanup {
-  sudo rm -rf $NODE_EXPORTER_INSTALL_DIR/NODE_EXPORTER.old
-  sudo rm -rf $NODE_EXPORTER_INSTALL_DIR/NODE_EXPORTER-${NODE_EXPORTER_VERSION}*
+  sudo rm -rf $NODE_EXPORTER_INSTALL_DIR.old
+  sudo rm -rf $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}*
 }
 
 # Cleanup eventual previous failed installs
