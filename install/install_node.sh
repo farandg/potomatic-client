@@ -34,7 +34,7 @@ echo ""
 sleep 2
 
 # Check all necessary components are present
-BINARIES=( wget, tar)
+BINARIES=( wget tar )
 
 if ! command -v apt-get > /dev/null; then
   echo "[ERROR] apt-get is not installed. Please install apt-get and try again." >&2
