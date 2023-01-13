@@ -66,53 +66,27 @@ if [ -d "$PROMETHEUS_DIR" ]; then
   sleep 1
 fi
 
+# Downloading and installing node_exporter and dependencies
 echo "Downloading install package..."
-if ! command -v wget > /dev/null; then
-  # Install wget if it is not present
-  echo "[ERROR] wget not found. Installing ..."
-  if ! command -v apt-get > /dev/null; then
-    echo "[ERROR] apt-get is not installed. Please install apt-get and try again." >&2
-    abort
-    exit 1
-  fi
-  sudo apt-get update -y
-  sudo apt-get install -y wget
-fi
 sudo mkdir -p $PROMETHEUS_DIR || { echo "Error creating directory $PROMETHEUS_DIR. Aborting..." >&2; abort; exit 1; }
 sudo wget -q https://github.com/prometheus/prometheus/releases/download/v${PROMETHEUS_VERSION}/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz --directory-prefix=$PROMETHEUS_INSTALL_DIR
-
-echo ""
-echo "Package downloaded. Unpacking..."
-if ! command -v tar > /dev/null; then
-  # Install wget if it is not present
-  echo "[ERROR] tar not found. Installing ..."
-  if ! command -v apt-get > /dev/null; then
-    echo "[ERROR]  apt-get is not installed. Please install apt-get and try again." >&2
-    abort
-    exit 1
-  fi
-  sudo apt-get update -y
-  sudo apt-get install -y tar
-fi
+echo "Package downloaded."
+sleep 1
+echo "Unpacking..."
 sudo tar xfz $PROMETHEUS_INSTALL_DIR/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz -C $PROMETHEUS_DIR --strip-components=1 || {echo "[ERROR] unpacking. Aborting..." >&2; echo "Please try again manually, or re-run this script"; abort; exit 1;}
 sudo rm $PROMETHEUS_INSTALL_DIR/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz || {echo "[ERROR] deleting file $PROMETHEUS_INSTALL_DIR/prometheus-${PROMETHEUS_VERSION}.${PROMETHEUS_ARCH}.tar.gz" >&2; echo "Please try again manually, or re-run this script"; abort; exit 1;}
-
-echo ""
 echo "Unpacking done."
 sleep 1
-echo ""
-echo "Setting up, securing and starting Prometheus"
-echo ""
-sleep 1
-sudo cp ../files/prometheus/* $PROMETHEUS_DIR
-sudo cp ../files/system/services/prometheus.service /etc/systemd/system/
-sudo systemctl daemon-reload && sudo systemctl start prometheus && sudo systemctl enable prometheus
-cd $PROMETHEUS_DIR
 
-echo "Starting Prometheus..."
-echo ""
+echo "Setting up, securing and starting Prometheus"
 sleep 1
-sudo nohup ./prometheus --config.file=prometheus.yml --web.enable-lifecycle & || {echo "[ERROR] starting Prometheus. Please check and try again, or re-run this script" >&2; abort; exit 1;}
+sudo cp ../files/prometheus/* $PROMETHEUS_DIR/
+sudo cp ../files/system/services/prometheus.service /etc/systemd/system/
+sudo systemctl daemon-reload
+sleep 1
+sudo systemctl enable node_exporter
+sleep 1
+sudo systemctl start node_exporter
 
 cleanup
 echo "All done !!"
