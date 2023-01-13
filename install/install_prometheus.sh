@@ -30,7 +30,7 @@ function cleanup {
 
 # Cleanup eventual previous failed installs
 cleanup
-
+clear
 echo ""
 echo ""
 echo "#####################################################"
