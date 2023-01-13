@@ -56,11 +56,9 @@ done
 if [ -d "$NODE_EXPORTER_DIR" ]; then
   # Delete the node_exporter directory and its contents if it exists
   echo "Previous installation detected. Removing..."
-  echo ""
   sleep 1
   sudo mv -f $NODE_EXPORTER_DIR $NODE_EXPORTER_DIR.old
   echo "Removing done."
-  echo ""
   sleep 1
 fi
 
@@ -69,16 +67,13 @@ echo "Downloading install package..."
 sudo mkdir -p $NODE_EXPORTER_DIR || { echo "Error creating directory $NODE_EXPORTER_DIR. Aborting..." >&2; abort; exit 1; }
 sudo wget -q https://github.com/prometheus/node_exporter/releases/download/v${NODE_EXPORTER_VERSION}/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz --directory-prefix=$NODE_EXPORTER_INSTALL_DIR || { echo "Error while unpacking. Aborting..." >&2; abort; exit 1; }
 echo "Package downloaded"
-echo ""
 sleep 1
 
 echo "Unpacking..."
-echo ""
-sudo tar xfz $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz -C $NODE_EXPORTER_DIR --strip-components=1 || { echo "[ERROR] unpacking. Aborting..." >&2; echo "Please try again manually, or re-run this script"; abort; exit 1; }
+udo tar xfz $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz -C $NODE_EXPORTER_DIR --strip-components=1 || { echo "[ERROR] unpacking. Aborting..." >&2; echo "Please try again manually, or re-run this script"; abort; exit 1; }
 sudo rm $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz || { echo "[ERROR] deleting file $NODE_EXPORTER_INSTALL_DIR/node_exporter-${NODE_EXPORTER_VERSION}.${NODE_EXPORTER_ARCH}.tar.gz" >&2; echo "Please try again manually, or re-run this script"; abort; exit 1; }
 
 echo "Setting up and starting node_exporter"
-echo ""
 sleep 1
 sudo cp ../files/system/services/node_exporter.service /etc/systemd/system/node_exporter.service
 sudo systemctl daemon-reload
