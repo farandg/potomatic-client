@@ -14,7 +14,7 @@ POTOMATIC_HOSTNAME=$(hostname -s)
 
 function abort {
   if [ -d $NODE_EXPORTER_DIR ]; then
-    sudo rm -rf $NODE_EXPORTER_DIR  
+    sudo rm -rf $NODE_EXPORTER_DIR/  
   fi
   if [ -d $NODE_EXPORTER_DIR.old ]; then
     sudo mv -f $NODE_EXPORTER_DIR.old/ $NODE_EXPORTER_DIR/
