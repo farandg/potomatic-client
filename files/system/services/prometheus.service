@@ -8,7 +8,7 @@ Type=simple
 Restart=always
 RestartSec=1
 User=root
-ExecStart=cd /opt/node_exporter && nohup ./node_exporter --collector.wifi &
+ExecStart=cd /opt/prometheus && nohup ./prometheus --config.file=prometheus.yml --web.enable-lifecycle &
 
 [Install]
 WantedBy=multi-user.target
