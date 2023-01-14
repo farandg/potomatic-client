@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-import Adafruit-DHT, pendulum, random
-from flask import Flask, render_template
+import Adafruit_DHT, pendulum, random
+from flask import Flask, render_template, request
 from gpiozero import LED, RGBLED
 
 app       = Flask(__name__)
