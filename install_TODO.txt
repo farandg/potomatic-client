@@ -1,5 +1,0 @@
-install nginx
-  https://www.nginx.com/blog/setting-up-nginx/
-
-install https://github.com/prometheus/node_exporter/releases/download/v1.5.0/node_exporter-1.5.0.linux-armv7.tar.gz
-
