@@ -45,7 +45,7 @@ def action(deviceName, action):
         device.off()
     if action == "blink":
         device.blink(.5, .3)
-    if device == "rgb" and action == "disco":
+    if action == "disco":
         disco_time()
     templateData = {
         'led_status' : str(led.is_lit)
