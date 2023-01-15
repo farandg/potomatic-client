@@ -35,6 +35,7 @@ def index():
 
 @app.route("/<deviceName>/<action>")
 def action(deviceName, action):
+    status = led.islit
     if deviceName == "led":
         device = led
     if deviceName == "rgb":
@@ -48,7 +49,7 @@ def action(deviceName, action):
     if device == "rgb" and action == "disco":
         disco_time()
     templateData = {
-        'led_status' : str(led.islit)
+        'led_status' : str(status)
     }
     return render_template('potosway.html', **templateData)
 
