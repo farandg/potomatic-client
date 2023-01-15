@@ -43,12 +43,12 @@ def index():
 def led_action(deviceName, action):
     if deviceName == "led":
         device = led
-    if action == "on":
-        device.on()
-    if action == "off":
-        device.off()
-    if action == "blink":
-        device.blink(.5, .3)
+        if action == "on":
+            device.on()
+        if action == "off":
+            device.off()
+        if action == "blink":
+            device.blink(.5, .3)
     templateData = {
         'led_status' : str(led.is_lit)
     }
@@ -58,12 +58,12 @@ def led_action(deviceName, action):
 def rgb_action(deviceName, action):
     if deviceName == "rgb":
         device = rgb
-    if action == "on":
-        rgb_on()
-    if action == "off":
-        rgb_off()
-    if action == "disco":
-        disco_time()
+        if action == "on":
+            rgb_on()
+        if action == "off":
+            rgb_off()
+        if action == "disco":
+            disco_time()
     templateData = {
         'led_status' : str(led.is_lit)
     }
