@@ -19,23 +19,23 @@ bluePWM     = 1
 def redColor():
   while True:
     rgb.color = (redPWM, 0, 0)
-    time.sleep(pulseWidth)
+    sleep(pulseWidth)
     rgb.color = (0,0,0)
-    time.sleep(pulseWidth)
+    sleep(pulseWidth)
 
 def greenColor():
   while True:
     rgb.color = (0, 0, 0)
-    time.sleep(pulseWidth)
+    sleep(pulseWidth)
     rgb.color = (0,greenPWM,0)
-    time.sleep(pulseWidth)
+    sleep(pulseWidth)
 
 def blueColor():
   while True:
     rgb.color = (0, 0, bluePWM)
-    time.sleep(pulseWidth)
+    sleep(pulseWidth)
     rgb.color = (0,0,0)
-    time.sleep(pulseWidth)
+    sleep(pulseWidth)
 
 def set_redPWM(value):
     global redPWM

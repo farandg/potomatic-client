@@ -1,6 +1,6 @@
-Adafruit_DHT~=1.4.0
-astral~=3.2
-Flask~=2.2.2
-gpiozero~=1.6.2
-pendulum~=2.1.2
-picamera~=1.13
+Adafruit_DHT==1.4.0
+astral==3.2
+Flask==2.2.2
+gpiozero==1.6.2
+pendulum==2.1.2
+picamera==1.13
