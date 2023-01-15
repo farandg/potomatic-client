@@ -15,13 +15,13 @@ dht_pin     = 21
 def disco_time():
     rgb.off()
     while True: 
-        zzz     = round(random.uniform(.1,.5),1) 
-        t_on    = round(random.uniform(.1,.5),1) 
-        t_off   = round(random.uniform(.1,.5),1) 
-        red     = random.random()
-        green   = random.random()
-        blue    = random.random()
-        rgb.pulse(t_on, t_off, (red, green, blue), (0, 0, 0))
+        zzz          = round(random.uniform(.1,.5),1) 
+        t_on         = round(random.uniform(.1,.5),1) 
+        t_off        = round(random.uniform(.1,.5),1) 
+        redLight     = random.random()
+        greenLight   = random.random()
+        blueLight    = random.random()
+        rgb.pulse(t_on, t_off, (redLight, greenLight, blueLight), (0, 0, 0))
         sleep(zzz)
         return
 
@@ -58,16 +58,19 @@ def action(deviceName, action):
         if action == "on":
             device.on()
         if action == "off":
+            zzz   = 0 
+            t_on  = 0
+            t_off = 0
             device.off()
         if action == "red":
             rgb.off()
-            rgb.color = (1,0,0)
+            rgb.color = ('Red')
         if action =="green":
             rgb.off()
-            rgb.color = (0,1,0)
+            rgb.color = ('Green')
         if action == "blue":
             rgb.off()
-            rgb.color = (0,0,1)
+            rgb.color = ('Blue')
         if action == "disco":
             disco_time()
     templateData = {
