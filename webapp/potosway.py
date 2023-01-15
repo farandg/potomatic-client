@@ -35,6 +35,7 @@ def index():
 
 @app.route("/<deviceName>/<action>")
 def action(deviceName, action):
+    device = deviceName
     status = device.islit()
     if deviceName == "led":
         device = led
