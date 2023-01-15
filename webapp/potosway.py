@@ -63,14 +63,14 @@ def action(deviceName, action):
             t_off = 0
             device.off()
         if action == "red":
-            rgb.off()
-            rgb.color = ('Red')
+            device.off()
+            device.color = (1,0,0)
         if action =="green":
             rgb.off()
-            rgb.color = ('Green')
+            rgb.color = (0,1,0)
         if action == "blue":
             rgb.off()
-            rgb.color = ('Blue')
+            rgb.color = (0,0,1)
         if action == "disco":
             disco_time()
     templateData = {
