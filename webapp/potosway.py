@@ -37,7 +37,7 @@ def index():
 def action(deviceName, action):
     if deviceName == "led":
         device = led
-    if deviceNmae == "rgb":
+    if deviceName == "rgb":
         device = rgb
     if action == "on":
         device.on()
