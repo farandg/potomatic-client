@@ -54,6 +54,7 @@ body {
 
 /* Buttons */
 .button {
+    display: flex
     border-radius: 27px;
     background: #8abcab;
     box-shadow: inset -13px 13px 25px #5b7c71,
