@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+    <head>
+        <title>{{ title }}</title>
+        <h1>{{ page_title }}</h1>
+        <link rel="stylesheet" href="../static/style.css/">
+    </head>
+    <body>
+        <h1> {{ subtitle }} </h1>
+        <h2>Current temperature: {{ _celsius }}°C</h2>
+        <h2>Current humidity: {{ _humidity }}%</h2>
+        <br>
+        <h2> Commands </h2>
+        <h2> 
+            LED Ctrl ==> 
+            <a href="/led/on"class="button"role="button">ON</a> 
+            <a href="/led/off"class="button"role="button">OFF</a>
+            <a href="/led/blink"class="button"role="button">BLINK</a>
+            RGB Ctrl ==>
+            <a href="/rgb/on"class="button"role="button">ON</a>
+            <a href="/rgb/off"class="button"role="button">OFF</a>
+            <a href="/rgb/disco"class="button"role="button">DISCO</a>
+        </body>
+</html>
+
