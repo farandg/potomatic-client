@@ -13,25 +13,29 @@ rgb         = RGBLED(13,19,6)
 dht_pin     = 21
 
 def rgb_red():
+    rgb.off()
     rgb.color = (1,0,0)
 
 def rgb_green():
+    rgb.off()
     rgb.color = (0,1,0)
 
 def rgb_blue():
+    rgb.off()
     rgb.color = (0,0,1)
 
 def disco_time():
-  while True: 
-    zzz     = round(random.uniform(.1,.5),1) 
-    t_on    = round(random.uniform(.1,.5),1) 
-    t_off   = round(random.uniform(.1,.5),1) 
-    red     = random.random()
-    green   = random.random()
-    blue    = random.random()
-    rgb.pulse(t_on, t_off, (red, green, blue), (0, 0, 0))
-    sleep(zzz)
-    return
+    rgb.off()
+    while True: 
+        zzz     = round(random.uniform(.1,.5),1) 
+        t_on    = round(random.uniform(.1,.5),1) 
+        t_off   = round(random.uniform(.1,.5),1) 
+        red     = random.random()
+        green   = random.random()
+        blue    = random.random()
+        rgb.pulse(t_on, t_off, (red, green, blue), (0, 0, 0))
+        sleep(zzz)
+        return
 
 @app.route('/')
 def index():
