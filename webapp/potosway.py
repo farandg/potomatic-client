@@ -11,13 +11,6 @@ led       = LED(17)
 rgb       = RGBLED(13,19,6)
 dht_pin   = 21
 
-def rgb_on():
-    rgb.off()
-    rgb.color = (1,1,1)
-
-def rgb_off():
-    rgb.color = (0,0,0)
-
 def disco_time():
   while True: 
     zzz     = round(random.uniform(.1,.5),1) 
@@ -54,9 +47,9 @@ def led_action(deviceName, action):
     if deviceName == "rgb":
         device = rgb
         if action == "on":
-            rgb_on()
+            rgb.color(1,1,1)
         if action == "off":
-            rgb_off()
+            rgb.color(0,0,0)
         if action == "disco":
             disco_time()
     templateData = {
