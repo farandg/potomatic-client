@@ -9,20 +9,8 @@ from gpiozero import LED, RGBLED
 app         = Flask(__name__)
 dht         = Adafruit_DHT.DHT11
 led         = LED(17)
-rgb         = RGBLED(13,19,6)
+rgb         = RGBLED(13,19,6,False)
 dht_pin     = 21
-
-def rgb_red():
-    rgb.off()
-    rgb.color = (1,0,0)
-
-def rgb_green():
-    rgb.off()
-    rgb.color = (0,1,0)
-
-def rgb_blue():
-    rgb.off()
-    rgb.color = (0,0,1)
 
 def disco_time():
     rgb.off()
@@ -72,11 +60,14 @@ def action(deviceName, action):
         if action == "off":
             device.off()
         if action == "red":
-            rgb_red()
+            rgb.off()
+            rgb.color = (1,0,0)
         if action =="green":
-            rgb_green()
+            rgb.off()
+            rgb.color = (0,1,0)
         if action == "blue":
-            rgb_blue()
+            rgb.off()
+            rgb.color = (0,0,1)
         if action == "disco":
             disco_time()
     templateData = {
