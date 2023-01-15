@@ -47,9 +47,9 @@ def action(deviceName, action):
         device.blink(.5, .3)
     if device == "rgb" and action == "disco":
         disco_time()
-    templateData = {
-        'led_status' : str(status)
-    }
+    # templateData = {
+    #     'led_status' : str(status)
+    # }
     return render_template('potosway.html', **templateData)
 
 if __name__ == '__main__':
