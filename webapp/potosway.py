@@ -9,7 +9,7 @@ from gpiozero import LED, RGBLED
 app         = Flask(__name__)
 dht         = Adafruit_DHT.DHT11
 led         = LED(17)
-rgb         = RGBLED(13,19,6,False)
+rgb         = RGBLED(13,19,6,True)
 dht_pin     = 21
 
 def disco_time():
