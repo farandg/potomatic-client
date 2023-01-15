@@ -11,52 +11,15 @@ dht         = Adafruit_DHT.DHT11
 led         = LED(17)
 rgb         = RGBLED(13,19,6)
 dht_pin     = 21
-pulseWidth  = .01
-redPWM      = 1
-greenPWM    = 1
-bluePWM     = 1
 
-def redColor():
-  while True:
-    rgb.color = (redPWM, 0, 0)
-    sleep(pulseWidth)
-    rgb.color = (0,0,0)
-    sleep(pulseWidth)
+def rgb_red():
+    rgb.color = (1,0,0)
 
-def greenColor():
-  while True:
-    rgb.color = (0, 0, 0)
-    sleep(pulseWidth)
-    rgb.color = (0,greenPWM,0)
-    sleep(pulseWidth)
+def rgb_green():
+    rgb.color = (0,1,0)
 
-def blueColor():
-  while True:
-    rgb.color = (0, 0, bluePWM)
-    sleep(pulseWidth)
-    rgb.color = (0,0,0)
-    sleep(pulseWidth)
-
-def set_redPWM(value):
-    global redPWM
-    redPWM = value
-
-def set_greenPWM(value):
-    global greenPWM
-    greenPWM = value
-
-def set_bluePWM(value):
-    global bluePWM
-    bluePWM = value
-
-thread_red   = Thread(target=redColor)
-thread_green = Thread(target=greenColor)
-thread_blue  = Thread(target=blueColor)
-
-thread_red.start()
-thread_green.start()
-thread_blue.start()
-
+def rgb_blue():
+    rgb.color = (0,0,1)
 
 def disco_time():
   while True: 
@@ -68,6 +31,7 @@ def disco_time():
     blue    = random.random()
     rgb.pulse(t_on, t_off, (red, green, blue), (0, 0, 0))
     sleep(zzz)
+    return
 
 @app.route('/')
 def index():
@@ -82,7 +46,9 @@ def index():
     return render_template('potosway.html', **templateData)
 
 @app.route("/<deviceName>/<action>")
-def led_action(deviceName, action):
+def action(deviceName, action):
+    if not rgb.is_lit: rgb_status = "OFF" else rgb_status = "ON"
+    if not led.is_lit: led_status = "OFF" else led_status = "ON"
     if deviceName == "led":
         device = led
         if action == "on":
@@ -94,13 +60,20 @@ def led_action(deviceName, action):
     if deviceName == "rgb":
         device = rgb
         if action == "on":
-            rgb.color = (1,1,1)
+            device.on()
         if action == "off":
-            rgb.off()
+            device.off()
+        if action == "red":
+            rgb_red()
+        if action =="green":
+            rgb_green()
+        if action == "blue":
+            rgb_blue()
         if action == "disco":
             disco_time()
     templateData = {
-        'led_status' : str(led.is_lit)
+        'led_status' : led_status
+        'rgb_status' : rgb_status
     }
     return render_template('potosway.html', **templateData)
 
