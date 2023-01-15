@@ -2,14 +2,61 @@
 
 import Adafruit_DHT, pendulum, random
 from flask import Flask, render_template, request
+from threading import Thread
 from time import sleep
 from gpiozero import LED, RGBLED
 
-app       = Flask(__name__)
-dht       = Adafruit_DHT.DHT11
-led       = LED(17)
-rgb       = RGBLED(13,19,6)
-dht_pin   = 21
+app         = Flask(__name__)
+dht         = Adafruit_DHT.DHT11
+led         = LED(17)
+rgb         = RGBLED(13,19,6)
+dht_pin     = 21
+pulseWidth  = .01
+redPWM      = 1
+greenPWM    = 1
+bluePWM     = 1
+
+def redColor():
+  while True:
+    rgb.color = (redPWM, 0, 0)
+    time.sleep(pulseWidth)
+    rgb.color = (0,0,0)
+    time.sleep(pulseWidth)
+
+def greenColor():
+  while True:
+    rgb.color = (0, 0, 0)
+    time.sleep(pulseWidth)
+    rgb.color = (0,greenPWM,0)
+    time.sleep(pulseWidth)
+
+def blueColor():
+  while True:
+    rgb.color = (0, 0, bluePWM)
+    time.sleep(pulseWidth)
+    rgb.color = (0,0,0)
+    time.sleep(pulseWidth)
+
+def set_redPWM(value):
+    global redPWM
+    redPWM = value
+
+def set_greenPWM(value):
+    global greenPWM
+    greenPWM = value
+
+def set_bluePWM(value):
+    global bluePWM
+    bluePWM = value
+
+thread_red   = Thread(target=redColor)
+thread_green = Thread(target=greenColor)
+thread_blue  = Thread(target=blueColor)
+
+thread_red.start()
+thread_green.start()
+thread_blue.start()
+
 
 def disco_time():
   while True: 
@@ -49,13 +96,23 @@ def led_action(deviceName, action):
         if action == "on":
             rgb.color = (1,1,1)
         if action == "off":
-            rgb.color = (0,0,0)
+            rgb.off()
         if action == "disco":
             disco_time()
     templateData = {
         'led_status' : str(led.is_lit)
     }
     return render_template('potosway.html', **templateData)
+
+@app.route('/result/<color>/<value>')
+def result(color,value):
+    global redPWM,greenPWM,bluePWM
+    if(color == "red"):
+        redPWM = int(value)
+    elif(color == "green"):
+        greenPWM = int(value)
+    elif(color == "blue"):
+        bluePWM = int(value)
 
 if __name__ == '__main__':
     app.run(debug=True, port=80, host='0.0.0.0')

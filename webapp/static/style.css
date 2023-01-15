@@ -1,102 +1,128 @@
+/* Global styles */
 body {
-    background: rgb(15, 15, 117);
-    color: rgb(247, 247, 211);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: white;
+    background-color: #264653;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
     align-items: center;
-  }
-  
-  title {
-    font-family: Candal;
-    font-size: 30pt;
-  }
-  
-  h1 {
-    font-family: "Days One";
-    font-size: 20pt;
-  }
-  
-  h2 {
-    font-family: "Days One";
-    font-size: 12pt;
-  }
-  
-  .image-container {
-    display: flex;
-    align-items: center;
-  }
-  
-  img {
-    display: block;
-    margin: 0 auto;
-  }
-  .button {
-    font: bold 15px Candal;
-    text-decoration: none;
-    background-color: #EEEEEE;
-    color: #333333;
-    padding: 2px 6px 2px 6px;
-    border-top: 1px solid #228305;
-    border-right: 1px solid #228305;
-    border-bottom: 1px solid #228305;
-    border-left: 1px solid #CCCCCC;
-  }  
-  .button-19 {
-    appearance: button;
-    background-color: #1899D6;
-    border: solid transparent;
-    border-radius: 16px;
-    border-width: 0 0 4px;
-    box-sizing: border-box;
-    color: #FFFFFF;
-    cursor: pointer;
-    display: inline-block;
-    font-family: din-round,sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: .8px;
-    line-height: 20px;
-    margin: 0;
-    outline: none;
-    overflow: visible;
-    padding: 13px 16px;
-    text-align: center;
-    text-transform: uppercase;
-    touch-action: manipulation;
-    transform: translateZ(0);
-    transition: filter .2s;
-    user-select: none;
-    -webkit-user-select: none;
-    vertical-align: middle;
-    white-space: nowrap;
+    min-height: 100vh;
+}
+
+/* Top Images */
+.top-images {
     width: 100%;
-  }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-  .button-19:after {
-    background-clip: padding-box;
-    background-color: #1CB0F6;
-    border: solid transparent;
-    border-radius: 16px;
-    border-width: 0 0 4px;
-    bottom: -4px;
-    content: "";
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: -1;
-  }
+.top-images img {
+    width: 45%;
+    max-width: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
 
-  .button-19:main,
-  .button-19:focus {
-    user-select: auto;
-  }
+/* Control panels */
+.control-panels {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
 
-  .button-19:hover:not(:disabled) {
-    filter: brightness(1.1);
-    -webkit-filter: brightness(1.1);
-  }
+.control-panel {
+    width: 30%;
+    background-color: #2A9D8F;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
 
-  .button-19:disabled {
-    cursor: auto;
-  }
+.control-panel h3 {
+    font-size: 20pt;
+    color: #E9C46A;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+.button {
+    font-size: 14pt;
+    color: white;
+    background-color: #F4A261;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.button:hover {
+    background-color: #E76F51;
+}
+
+/* Info bar */
+.info-bar {
+    font-size: 14pt;
+    color: white;
+    background-color: #F4A261;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Sliders */
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #F4A261;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: #E76F51;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+width: 25px;
+height: 25px;
+border-radius: 50%;
+background-color: #E76F51;
+cursor: pointer;
+}
+
+/* Master off button */
+.master-off {
+margin-top: 20px;
+}
+
+.master-off a {
+font-size: 20pt;
+color: white;
+background-color: #E76F51;
+padding: 10px 20px;
+border-radius: 5px;
+text-decoration: none;
+}
+
+.master-off a:hover {
+background-color: #F4A261;
+}
