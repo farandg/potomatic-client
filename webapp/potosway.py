@@ -47,9 +47,9 @@ def led_action(deviceName, action):
     if deviceName == "rgb":
         device = rgb
         if action == "on":
-            rgb.color(1,1,1)
+            rgb.color = (1,1,1)
         if action == "off":
-            rgb.color(0,0,0)
+            rgb.color = (0,0,0)
         if action == "disco":
             disco_time()
     templateData = {
