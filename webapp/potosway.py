@@ -11,6 +11,7 @@ rgb       = RGBLED(13,19,6)
 dht_pin   = 21
 
 def rgb_on():
+    rgb.off()
     rgb.color = (1,1,1)
 
 def rgb_off():
