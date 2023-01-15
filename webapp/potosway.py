@@ -23,7 +23,7 @@ def disco_time():
         blueLight    = random.random()
         rgb.pulse(t_on, t_off, (redLight, greenLight, blueLight), (0, 0, 0))
         sleep(zzz)
-        return
+    return
 
 @app.route('/')
 def index():
