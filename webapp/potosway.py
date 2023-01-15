@@ -35,8 +35,6 @@ def index():
 
 @app.route("/<deviceName>/<action>")
 def action(deviceName, action):
-    device = deviceName
-    status = device.islit()
     if deviceName == "led":
         device = led
     if deviceName == "rgb":
@@ -47,8 +45,6 @@ def action(deviceName, action):
         device.off()
     if action == "blink":
         device.blink(.5, .3)
-    if action == "status":
-        status = device.is_lit()
     if device == "rgb" and action == "disco":
         disco_time()
     templateData = {
