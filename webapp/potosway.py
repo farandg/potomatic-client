@@ -49,13 +49,6 @@ def led_action(deviceName, action):
             device.off()
         if action == "blink":
             device.blink(.5, .3)
-    templateData = {
-        'led_status' : str(led.is_lit)
-    }
-    return render_template('potosway.html', **templateData)
-
-@app.route("/<deviceName>/<action>")
-def rgb_action(deviceName, action):
     if deviceName == "rgb":
         device = rgb
         if action == "on":
