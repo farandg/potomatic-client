@@ -4,3 +4,4 @@ Flask==2.2.2
 gpiozero==1.6.2
 pendulum==2.1.2
 picamera==1.13
+prometheus_client==0.15.0
