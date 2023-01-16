@@ -1,5 +1,5 @@
 [Unit]
-Description=Prometheus service
+Description=dht_exporter service
 After=network.target
 StartLimitIntervalSec=0
 
