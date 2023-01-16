@@ -49,11 +49,12 @@ if [ -d "$EXPORTERS_DIR" ]; then
   sudo mv -f $EXPORTERS_DIR $EXPORTERS_DIR.old
   echo "Removing done."
   sleep 1
+else
+  sudo mkdir -p $EXPORTERS_DIR
 fi
 
 # Downloading and installing dht_exporter and dependencies
 echo "Installing components..."
-sudo mkdir -p $EXPORTERS_DIR
 sudo cp ../app/exporters/* $EXPORTERS_DIR
 sudo cp ../files/system/services/dht_exporter.service /etc/systemd/system/dht_exporter.service
 
