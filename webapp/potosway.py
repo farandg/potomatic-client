@@ -57,9 +57,6 @@ def action(deviceName, action):
         if action == "on":
             device.on()
         if action == "off":
-            # zzz   = 0 
-            # t_on  = 0
-            # t_off = 0
             device.off()
         if action == "red":
             device.off()
@@ -77,16 +74,6 @@ def action(deviceName, action):
         'rgb_status' : rgb_status
     }
     return render_template('potosway.html', **templateData)
-
-@app.route('/result/<color>/<value>')
-def result(color,value):
-    global redPWM,greenPWM,bluePWM
-    if(color == "red"):
-        redPWM = int(value)
-    elif(color == "green"):
-        greenPWM = int(value)
-    elif(color == "blue"):
-        bluePWM = int(value)
 
 if __name__ == '__main__':
     app.run(debug=True, port=80, host='0.0.0.0')
