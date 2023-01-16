@@ -19,7 +19,7 @@ function abort {
 
 function cleanup {
   if [ -d $EXPORTERS_DIR.old ]; then
-    sudo rm -rf $PROMETHEUS_DIR.old/
+    sudo rm -rf $EXPORTERS_DIR.old/
   fi
 }
 
@@ -46,7 +46,7 @@ if [ -d "$EXPORTERS_DIR" ]; then
   # Delete the dht_exporter directory and its contents if it exists
   echo "Previous installation detected. Removing..."
   sleep 1
-  sudo mv -f $EXPORTERS_DIR $EXPORTERS_DIR.old
+  sudo mv -f $EXPORTERS_DIR $EXPORTERS_DIR.old && mkdir $EXPORTERS_DIR
   echo "Removing done."
   sleep 1
 else
