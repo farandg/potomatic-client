@@ -1,8 +1,7 @@
 #!/usr/bin/env python
-
+import Adafruit_DHT
 from prometheus_client import start_http_server, Gauge
 from time import sleep
-import random
 
 dht_model   = 11
 dht_pin     = 21
