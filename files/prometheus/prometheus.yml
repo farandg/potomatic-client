@@ -18,5 +18,7 @@ scrape_configs:
       - targets: ['localhost:9100']
   # Scrape dht_exporter
   - job_name: 'dht_exporter'
+    metrics_path: /
     static_configs:
       - targets: ['localhost:8000']
+        
