@@ -12,7 +12,7 @@ hum         = Summary('dht_humidity', 'Humidity in percent')
 start_http_server(8000)
 while True:
     humidity, temperature = Adafruit_DHT.read_retry(11, 4)
-    temp.set(temp)
-    hum.set(hum)
+    temp.observe(temp)
+    hum.observe(hum)
     sleep(scrape)
 
