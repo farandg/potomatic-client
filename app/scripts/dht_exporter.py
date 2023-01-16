@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 import Adafruit_DHT
-from prometheus_client import start_http_server, Gauge
+from prometheus_client import start_http_server, Summary
 from time import sleep
 
 dht_model   = 11
 dht_pin     = 21
 scrape      = 15 #Unit is seconds
-temp        = str(Gauge('dht_temperature', 'Temperature in celsius provided by dht sensor'))
-hum         = str(Gauge('dht_humidity', 'Humidity in percents provided by dht sensor'))
+temp        = Summary('dht_temperature', 'Temperature in celsius')
+hum         = Summary('dht_humidity', 'Humidity in percent')
 
 start_http_server(8000)
 while True:
