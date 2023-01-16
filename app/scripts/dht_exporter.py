@@ -6,8 +6,8 @@ from time import sleep
 dht_model   = 11
 dht_pin     = 21
 scrape      = 15 #Unit is seconds
-temp        = Gauge('dht_temperature', 'Temperature in celsius provided by dht sensor')
-hum         = Gauge('dht_humidity', 'Humidity in percents provided by dht sensor')
+temp        = str(Gauge('dht_temperature', 'Temperature in celsius provided by dht sensor'))
+hum         = str(Gauge('dht_humidity', 'Humidity in percents provided by dht sensor'))
 
 start_http_server(8000)
 while True:
