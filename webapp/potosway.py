@@ -38,12 +38,24 @@ def index():
 
 @app.route("/<deviceName>/<action>")
 def action(deviceName, action):
+    if not pump.is_lit: 
+        pump_status = "OFF" 
+    else: pump_status = "ON"
     if not rgb.is_lit: 
         rgb_status = "OFF" 
     else: rgb_status = "ON"
     if not led.is_lit: 
         led_status = "OFF" 
     else: led_status = "ON"
+    if deviceName == "pump":
+        device = "pump"
+        if action == "on":
+            device.on()
+        if action == "on10":
+            device.on()
+            sleep(600)
+        if action == "off":
+            pump.off()
     if deviceName == "led":
         device = led
         if action == "on":
