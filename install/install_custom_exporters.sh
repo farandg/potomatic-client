@@ -3,7 +3,7 @@
 ## It installs dht_exporter, an open source monitoring tool which exposes metrics about your Potomatic
 ## In Cloud mode, the metrics produced will be stored and available in your Cloud Console
 ## In stand-alone mode, the metrics are ingested by dht_exporter, and you can access live monitoring of your potomatic on your network at http://<YOUR-PI-HOSTNAME>:9090
-set -e
+set -ex
 
 EXPORTERS_DIR=/opt/exporters
 POTOMATIC_HOSTNAME=$(hostname -s)

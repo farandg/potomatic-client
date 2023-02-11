@@ -5,7 +5,7 @@
 ## In stand-alone mode metrics are stored for ............. and you can access live monitoring of your potomatic on your network at http://<YOUR-PI-HOSTNAME>:9090
 
 # Exit immediately if any command returns a non-zero exit code
-set -e
+set -ex
 
 PROMETHEUS_VERSION=2.41.0
 PROMETHEUS_ARCH=linux-armv6
