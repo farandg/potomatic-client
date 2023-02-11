@@ -10,6 +10,7 @@ temp        = Gauge('dht_temperature_celsius', 'Temperature in celsius')
 hum         = Gauge('dht_humidity_percent', 'Humidity in percent')
 
 start_http_server(8000)
+
 while True:
     humidity, temperature = Adafruit_DHT.read_retry(dht_model, dht_pin)
     if temperature is not None:

@@ -43,7 +43,7 @@ if ! command -v apt-get > /dev/null; then
 fi
 
 if [ -d "$EXPORTERS_DIR" ]; then
-  # Delete the dht_exporter directory and its contents if it exists
+  # Delete the exporters directory and its contents if it exists
   echo "Previous installation detected. Removing..."
   sleep 1
   sudo mv -f $EXPORTERS_DIR $EXPORTERS_DIR.old && mkdir $EXPORTERS_DIR
@@ -57,18 +57,18 @@ fi
 echo "Installing components..."
 sudo cp ../app/exporters/* $EXPORTERS_DIR
 sudo cp ../files/system/services/dht_exporter.service /etc/systemd/system/dht_exporter.service
+sudo cp ../files/system/services/water_level_exporter.service /etc/systemd/system/water_level_exporter.service
 
-echo "Setting up and starting dht_exporter"
+echo "Setting up and starting exporters"
 sleep 1
 PATH=/$EXPORTERS_DIR:$PATH
 sudo systemctl daemon-reload
-sleep 1
-sudo systemctl enable dht_exporter
-sleep 1
-sudo systemctl start dht_exporter
-sleep 1
+sudo systemctl enable dht_exporter water_level_exporter
+sudo systemctl start dht_exporter water_level_exporter
 
 echo "All done !!"
 sleep 1
 cleanup
 echo "dht_exporter should now be exposing data at http://${POTOMATIC_HOSTNAME}.local:8000"
+sleep 1
+echo "water_level_exporter should now be exposing data at http://${POTOMATIC_HOSTNAME}.local:8001"
