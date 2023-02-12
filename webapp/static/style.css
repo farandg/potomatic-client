@@ -1,0 +1,94 @@
+/* Global styles */
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: white;
+    background-color: #264653;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Top Images */
+.top-images {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-images img {
+    width: 45%;
+    max-width: 300px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Control panels */
+.control-panels {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.control-panel {
+    width: 30%;
+    background-color: #2A9D8F;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.control-panel h3 {
+    font-size: 20pt;
+    color: #E9C46A;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+.button {
+    display: flex
+    border-radius: 27px;
+    background: #8abcab;
+    box-shadow: inset -13px 13px 25px #5b7c71,
+                inset 13px -13px 25px #b9fce5;}
+
+.button:hover {
+    background-color: #E76F51;
+}
+
+/* Info bar */
+.info-bar {
+    font-size: 14pt;
+    color: white;
+    background-color: #F4A261;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Master off button */
+.master-off {
+    margin-top: 20px;
+}
+
+.master-off a {
+font-size: 20pt;
+color: white;
+background-color: #E76F51;
+padding: 10px 20px;
+border-radius: 5px;
+text-decoration: none;
+}
+
+.master-off a:hover {
+background-color: #F4A261;
+}
+

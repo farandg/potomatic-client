@@ -1,0 +1,14 @@
+[Unit]
+Description=Node_exporter service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=g
+ExecStart=/opt/node_exporter/node_exporter --collector.wifi
+
+[Install]
+WantedBy=multi-user.target

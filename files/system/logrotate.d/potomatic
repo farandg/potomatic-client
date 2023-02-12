@@ -1,0 +1,21 @@
+compress
+
+/var/log/potomatic.log {
+    missingok
+    dateext
+    rotate 10
+    size 100k
+    maxage 365
+    olddir /var/log/potomatic_old/
+}
+
+/var/log/potomatic_images.log {
+    missingok
+    dateext
+    rotate 10
+    size 100k
+    maxage 365
+    olddir /var/log/potomatic_old/
+}
+
+
