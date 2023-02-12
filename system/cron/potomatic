@@ -4,6 +4,6 @@
 # Make sure services are revived should they fall
 0 * * * * root ./potomatic/scripts/check_lights.sh
 0 * * * * root ./potomatic/scripts/check_pump.sh
-0 * * * * root ./potomatic/scripts/check_watermkdir -p stl.sh
+0 * * * * root ./potomatic/scripts/check_water.sh
 # On the first day of every month grab all images and make a timelapse
 0 5 1 * * root ./potomatic/scripts/timelapse.sh
