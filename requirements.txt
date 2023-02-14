@@ -1,9 +1,9 @@
-adafruit-circuitpython-ads1x15==0.2.1
+adafruit_ads1x15==1.0.2
 Adafruit_DHT==1.4.0
 astral==3.2
+board==1.0
 Flask==2.2.2
 gpiozero==1.6.2
 pendulum==2.1.2
 picamera==1.13
-prometheus_client==0.15.0
-board==1.0
+prometheus_client==0.16.0

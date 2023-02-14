@@ -1,0 +1,14 @@
+[Unit]
+Description=water_level_exporter service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=g
+ExecStart=/opt/exporters/water_level_exporter.py
+
+[Install]
+WantedBy=multi-user.target
