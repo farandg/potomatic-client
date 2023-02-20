@@ -6,11 +6,10 @@ An exploded version is provided with each model to help with assembly.
 
 ### PRINTING
 *Please note the below recommended values are for the following setup:*  
-|Printer|Creality Ender 3 v2 calibrated with CR Touch|
+|Printer|Creality Ender 3 v2 calibrated with CR Touch||
 |---|---|---|
 |Filament| Arianeplast INGEO 3D870|Sunlu Meta|
 |Layer height| .2mm* |.2mm*|
-|---|---|---|
 |Nozzle temperature| 215°C|200°C|
 |Bed temperature|65°C|60°C|
 |Print speed |80mm/s+ |75mm/s |
