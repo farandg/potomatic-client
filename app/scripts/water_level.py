@@ -20,7 +20,7 @@ day         = now.day
 month       = now.month
 hour        = now.hour
 scrape      = 3600 #Unit is seconds
-warning_led = RGBLED(36,38,40, active_high=True, initial_value=(0,0,0), pwm=True, pin_factory=None)
+warning_led = RGBLED(22,24,26, active_high=True, initial_value=(0,0,0), pwm=True, pin_factory=None)
 
 def water_high():
     sleep(scrape)
