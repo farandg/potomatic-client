@@ -20,6 +20,7 @@ then
       if [ $? -ne 0 ]
       then
         echo "$now - [FATAL] - could not revive lights service. RIP" | tee /var/log/potomatic.log
+      fi
     else
       echo "$now - [INFO] - lights service started. going to sleep now..." | tee /var/log/potomatic.log
       exit 0

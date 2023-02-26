@@ -8,7 +8,7 @@ import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 from gpiozero import RGBLED
 from time import sleep
-from signal import pause
+# from signal import pause
 
 i2c         = busio.I2C(board.SCL, board.SDA)
 ads         = ADS.ADS1115(i2c)
@@ -41,7 +41,7 @@ while True:
     now         = pendulum.now('Europe/Paris')
     dawn        = dawn(home.observer)
     dusk        = dusk(home.observer)
-    value       = sensor.value
+    # value       = sensor.value
     if dawn <= now < dusk and water_level < 3 : # Only flash the warning led during the day to avoid being annoying at night
         water_low()
     elif dawn <= now < dusk and water_level > 3 :

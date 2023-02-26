@@ -13,7 +13,7 @@ LAST_MONTH=`date -d "$(date +%Y-%m-1) -1 month" +%B%Y`
 echo "$NOW - [INFO] - Making your potomatic timelapse for $LAST_MONTH" | tee -a $LOG_FILE
 if [ -d $IMAGES_DIR ]
 then
-  IMAGES = $(ls $IMAGES_DIR | wc -l)
+  IMAGES=$(ls $IMAGES_DIR | wc -l)
     if [ $IMAGES -lt 1 ]
     then 
       echo "$NOW - [FATAL] - No images in directory. Aborting" | tee -a $LOG_FILE
@@ -43,7 +43,7 @@ then
         fi
       fi
     fi
-else
-  echo "$NOW - [ERROR] - $IMAGE_DIR not present. Aborting..." | tee -a $LOG_FILE
-  exit 1
-fi
+  else
+    echo "$NOW - [ERROR] - $IMAGE_DIR not present. Aborting..." | tee -a $LOG_FILE
+    exit 1
+  fi

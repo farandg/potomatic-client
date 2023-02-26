@@ -18,7 +18,7 @@ Current code is designed for ```armv6``` architectures running Debian-based syst
 
 **COMING SOON** : support for different open source microcontrollers running micropython, including:
 * Espressif esp32
-* Raspberry Pi Pico W 
+* Raspberry Pi Pico W
 
 ## CODE CONVENTIONS
 For simplicity, and in order to leverage the capabilities of a Debian-based system, the following conventions are applied:

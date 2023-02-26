@@ -43,4 +43,4 @@ while True:
         take_pics()
     else:
         sleep(600)
-        return
+    return
