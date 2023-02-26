@@ -1,49 +1,53 @@
 #!/usr/bin/python
 
-##### pump.py #####
-## This script turns the pump on for one hour according to days and months
-## nov-feb: 1x per week on sundays
-## mar-jun: 2x per week on sundays and wednesdays
-## jul-aug: 3x per week on sundays, wednesdays and fridays
-## sep-oct: 2x per week on sundays and wednesdays
-## Please note locality is not determined automatically (yet) and has to be set manually
-
 import pendulum
 from time import sleep
-from gpiozero import LED
+from gpiozero import LED,RGBLED
 
-now       = pendulum.now('Europe/Paris')
-day       = now.day_of_week
-month     = now.month
-hour      = now.hour
+water_hour = 10
 pump      = LED(25)
-pump_led  = LED()
+pump_led = RGBLED(36,38,40, active_high=True, initial_value=(0,0,0), pwm=True, pin_factory=None)
 
-def water_one_hour():
+def led_it_rain(led_time):
+    pump_led.pulse(fade_in_time=2,fade_out_time=.5, on_color=(0,1,0), off_color=(0,.5,0), n=led_time, background=True)
+
+def make_it_rain(rain_time):
+    led_time = rain_time
     pump.on()
-    sleep(3600)
+    sleep(rain_time)
     pump.off()
-    pump_led.blink
+    led_it_rain(led_time)
 
-while True:
-    now     = pendulum.now('Europe/Paris')
-    month   = now.month
-    day     = now.day_of_week
-    hour    = now.hour
-    if 1 <= month <= 2 or 11 <= month <= 12:    ## water for one hour on sundays nov-feb
-        if  day == 0 and 10 <= hour <= 11:
-            water_one_hour()
-    elif 3 <= month <= 6 or 9 <= month <= 10:   ## water for one hour on sundays and wednesdays mar-jun and sep-oct
-        if day == 0 and 10 <= hour <= 11:
-            water_one_hour()
-        elif day == 3 and 10 <= hour <= 11:
-            water_one_hour()
-    elif 7 >= month <= 8 :                      ## water for one hour on sundays, wednesdays and fridays jul-aug
-        if day == 0 and 10 <= hour <= 11:
-            water_one_hour()
-        elif day == 3 and 10 <= hour <= 11:
-            water_one_hour()
-        elif day == 5 and 10 <= hour <= 11:
-            water_one_hour()
+## Define watering condition for three different types of plants.
+## ie: cactae receive no water between October and March.
+def water(plant):
+    now = pendulum.now('Europe/Paris')
+    month = now.month
+    day = now.day_of_week
+    hour = now.hour
+    if plant in ["cactus", "cactae", "cacti"]:
+        mid_water_days = [6]
+        high_water_days = [3,7]
+        mid_water_months = [3,4,9,10]
+        high_water_months = [5,6,7,8]
+    if plant == "succulent":
+        low_water_days = [7]
+        mid_water_days = [2,4]
+        high_water_days = [1,3,6]
+        low_water_months = [1,2,11,12]
+        mid_water_months = [3,4,9,10]
+        high_water_months = [5,6,7,8]
+    if plant == "hungry":
+        mid_water_days = [2,4]
+        high_water_days = [1,3,6]
+        low_water_months = [1,2,11,12]
+        mid_water_months = [3,4,9,10]
+        high_water_months = [5,6,7,8]
+    if month in low_water_months and day in low_water_days and hour == water_hour:
+        make_it_rain(5)
+    if month in mid_water_months and day in mid_water_days and hour == water_hour:
+        make_it_rain(10)
+    if month in high_water_months and day in high_water_days and hour == water_hour:
+        make_it_rain(20)
     else:
-        pump.off()
+        sleep(3600)
