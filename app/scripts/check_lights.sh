@@ -23,6 +23,7 @@ then
     else
       echo "$now - [INFO] - lights service started. going to sleep now..." | tee /var/log/potomatic.log
       exit 0
+      fi
     fi
 else
   echo "$now - [INFO] - lights service active. end of check" | tee /var/log/potomatic.log

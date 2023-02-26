@@ -3,3 +3,5 @@ brouillon*
 wip*
 install_poto*   
 libs/
+.trunk
+.doc/images/*wiring
