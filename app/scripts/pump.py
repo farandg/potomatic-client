@@ -50,4 +50,4 @@ def water(plant):
     if month in high_water_months and day in high_water_days and hour == water_hour:
         make_it_rain(20)
     else:
-        sleep(3600)
+        sleep(600)
